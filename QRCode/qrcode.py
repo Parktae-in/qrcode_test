@@ -35,5 +35,27 @@ def qrcode_wifi(ssid, encrypt, password):
     q=qrcode.create(data, encoding="utf-8")
     q.png("wificode.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
 
+#sms 전송 qrcode
+def qrcode_sms(sendto, msg):
+    data = f"SMSTO:{sendto}:{msg}"
+    q=qrcode.create(data, encoding="utf-8")
+    q.png("sms.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
+
+#이메일 작성해주는 qrcode
+def qrcode_email(email, subject, body):
+    data = f"MATMSG:TO:{email};SUB:{subject};BODY:{body};;"
+    q=qrcode.create(data, encoding="utf-8")
+    q.png("emailsend.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
+
+#휴대폰 지도 실행후 위도 경도 표시
+def qrcode_geo(lon, lat):
+    data = f"GEO:{lon},{lat}?z=10"
+    q=qrcode.create(data, encoding="utf-8")
+    q.png("geo.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
+
+    
+
 qrcode_namecard("Name", "010-0000-0000")
 qrcode_wifi("IPTIME", "WPA", "123123123")
+
+qrcode_geo(37.11,26.11)
