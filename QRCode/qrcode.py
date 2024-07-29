@@ -7,8 +7,8 @@ q = qrcode.create("https://www.naver.com")
 #base64 인코딩된 문자열 데이터로 변환
 qr_str = q.png_data_uri(module_color=(34, 30, 63), background=(255, 255, 0), scale=8)
 
+#qrcode namecard 생성하기
 #vCARD 포멧 형식으로 생성
-
 def qrcode_namecard(name, tel, email=None, url=None, org=None, title=None):
     vcard = f"BEGIN:VCARD\n"
     vcard += f"VSERSION:4.0\n"
@@ -29,5 +29,11 @@ def qrcode_namecard(name, tel, email=None, url=None, org=None, title=None):
     q = qrcode.create(vcard, encoding="utf-8")
     q.png("namecard.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
 
+#공유기 와이파이 qr코드 생성
+def qrcode_wifi(ssid, encrypt, password):
+    data = f"WIFI:S:{ssid};T:{encrypt};P:{password}"
+    q=qrcode.create(data, encoding="utf-8")
+    q.png("wificode.png", module_color=(34, 30, 63), background=(255, 255, 0), scale=5)
 
 qrcode_namecard("Name", "010-0000-0000")
+qrcode_wifi("IPTIME", "WPA", "123123123")
